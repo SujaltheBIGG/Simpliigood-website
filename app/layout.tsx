@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import CursorGlow from "@/components/CursorGlow";
+import dynamic from "next/dynamic";
+
+const CursorGlow = dynamic(() => import("@/components/CursorGlow"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export const metadata: Metadata = {
   title: "SimpliiGood | Fresh-Frozen Spirulina & Food Technology",
@@ -26,6 +31,8 @@ export default function RootLayout({
         {/*
           Custom Franklin Gothic URW fonts are loaded via @font-face in globals.css
         */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
       </head>
       <body className="font-body text-spirulina-green antialiased">
         <CursorGlow />

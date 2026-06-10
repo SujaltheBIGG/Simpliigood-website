@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import CTAButton from "@/components/CTAButton";
 import StoreMap from "@/components/StoreMap";
 import { STORES } from "@/lib/stores";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 const LABEL = "font-subheadline font-medium text-[13px] uppercase tracking-[0.1em]";
 const H2 = "font-section-headline font-extrabold text-[36px] uppercase text-spirulina-green";

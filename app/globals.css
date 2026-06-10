@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Mapbox CSS */
-@import "mapbox-gl/dist/mapbox-gl.css";
-
 /* ------------------------------------------------------------------ *
  *  Custom Fonts
  * ------------------------------------------------------------------ */
@@ -15,6 +12,7 @@
   font-weight: 600;
   font-style: normal;
   font-display: swap;
+  font-stretch: condensed;
 }
 
 /* franklingothicurw-hea.otf — Heavy → H2 Section Headlines */

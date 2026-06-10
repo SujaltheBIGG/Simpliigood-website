@@ -7,6 +7,11 @@ const nextConfig = {
   // lets the browser load the font at runtime instead. (Safe to re-enable in a
   // normal environment with network access.)
   optimizeFonts: false,
+  // Enable SWC minification for faster builds and smaller bundles
+  swcMinify: true,
+  // Enable gzip compression
+  compress: true,
+  // Optimize images
   images: {
     // All placeholder photography is served from the Unsplash CDN.
     // Swap these for your own campaign images later — just add the new
@@ -17,6 +22,37 @@ const nextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
+  // Production optimizations
+  productionBrowserSourceMaps: false,
+  // Reduce build time
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  // Add security and performance headers
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+        ],
+      },
+    ]
   },
 };
 
