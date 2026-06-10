@@ -1,0 +1,50 @@
+{
+  "retailers": [
+    { "name": "Wegmans", "status": "available" },
+    { "name": "GoPuff", "status": "available" },
+    { "name": "Sprouts", "status": "coming-soon" },
+    { "name": "Whole Foods", "status": "coming-soon" }
+  ],
+  "stores": [
+    {
+      "id": "wgm-001",
+      "retailer": "Wegmans",
+      "name": "Wegmans — Astor Place",
+      "address": "770 Broadway, New York, NY 10003",
+      "lat": 40.7305,
+      "lng": -73.9925
+    },
+    {
+      "id": "wgm-002",
+      "retailer": "Wegmans",
+      "name": "Wegmans — Natick",
+      "address": "9 Strawberry Hill Rd, Natick, MA 01760",
+      "lat": 42.3001,
+      "lng": -71.3503
+    },
+    {
+      "id": "gpf-001",
+      "retailer": "GoPuff",
+      "name": "GoPuff — Center City",
+      "address": "537 N 3rd St, Philadelphia, PA 19123",
+      "lat": 39.9612,
+      "lng": -75.1444
+    },
+    {
+      "id": "gpf-002",
+      "retailer": "GoPuff",
+      "name": "GoPuff — Austin Downtown",
+      "address": "1300 E 4th St, Austin, TX 78702",
+      "lat": 30.2638,
+      "lng": -97.7268
+    },
+    {
+      "id": "wgm-003",
+      "retailer": "Wegmans",
+      "name": "Wegmans — Alexandria",
+      "address": "150 Stovall St, Alexandria, VA 22314",
+      "lat": 38.8087,
+      "lng": -77.0586
+    }
+  ]
+}

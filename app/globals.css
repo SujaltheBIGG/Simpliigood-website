@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mapbox CSS */
+@import "mapbox-gl/dist/mapbox-gl.css";
+
+/* ------------------------------------------------------------------ *
+ *  Custom Fonts
+ * ------------------------------------------------------------------ */
+/* franklingothicurwcom-dem.otf — Compressed Demi → H1 Hero Headlines */
+@font-face {
+  font-family: 'Franklin Gothic URW';
+  src: url('/franklingothicurwcom-dem.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* franklingothicurw-hea.otf — Heavy → H2 Section Headlines */
+@font-face {
+  font-family: 'Franklin Gothic URW';
+  src: url('/franklingothicurw-hea.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* franklingothicurw-dem.otf — Demi → H3 Card Headlines */
+@font-face {
+  font-family: 'Franklin Gothic URW';
+  src: url('/franklingothicurw-dem.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* franklingothicurwcon-med.otf — Condensed Medium → Subheadlines and Nav */
+@font-face {
+  font-family: 'Franklin Gothic URW Condensed';
+  src: url('/franklingothicurwcon-med.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* franklingothicurwcon-boo.otf — Condensed Book → Body copy and Paragraphs */
+@font-face {
+  font-family: 'Franklin Gothic URW Condensed';
+  src: url('/franklingothicurwcon-boo.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Base
+ * ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+  /* Offset for the floating glass nav so in-page anchors (#store-locator etc.)
+     don't hide their headings behind the bar. */
+  scroll-padding-top: 100px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: "Barlow Condensed", "Franklin Gothic URW", Impact,
+    "Arial Narrow", sans-serif;
+  color: #154048;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Barlow Condensed runs a touch tall; nudge body leading for readability. */
+p {
+  line-height: 1.6;
+}
+
+::selection {
+  background: #fee62d;
+  color: #154048;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Reveal-on-scroll
+ *  Elements start hidden + nudged down, then settle once the
+ *  IntersectionObserver in <Reveal> adds .is-visible. Animates once.
+ * ------------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+/* Respect users who'd rather not see motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Form fields — shared focus treatment (white field, green ring)
+ * ------------------------------------------------------------------ */
+.field {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 16px;
+  color: #154048;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.field::placeholder {
+  color: #154048;
+  opacity: 0.45;
+}
+
+.field:focus {
+  border-color: #154048;
+}
+
+select.field {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23154048' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 48px;
+  cursor: pointer;
+}
+
+/* Hide the marquee's duplicated copy from assistive tech. */
+.marquee-track {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Premium hover effects
+ * ------------------------------------------------------------------ */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -15px rgba(21, 64, 72, 0.2);
+}
+
+.hover-glow {
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(21, 64, 72, 0.15);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Smooth link transitions
+ * ------------------------------------------------------------------ */
+a {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Image hover effects
+ * ------------------------------------------------------------------ */
+img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover img {
+  transform: scale(1.05);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Gradient border animations
+ * ------------------------------------------------------------------ */
+.gradient-border {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #154048, #fee62d, #154048);
+  background-size: 200% 200%;
+  border-radius: 18px;
+  z-index: -1;
+  animation: gradient-rotate 3s ease infinite;
+}
+
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Floating animation
+ * ------------------------------------------------------------------ */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Shimmer effect
+ * ------------------------------------------------------------------ */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
