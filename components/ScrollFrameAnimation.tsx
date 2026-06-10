@@ -97,7 +97,7 @@ export default function ScrollFrameAnimation() {
           }
         });
       },
-      { rootMargin: '50vh' }
+      { rootMargin: '500px' }
     );
 
     if (containerRef.current) {
