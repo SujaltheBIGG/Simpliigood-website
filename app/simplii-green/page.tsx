@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import Nav from "@/components/Nav";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import ComparisonTable from "@/components/ComparisonTable";
@@ -10,10 +11,19 @@ import AnimatedRecipeCard from "@/components/AnimatedRecipeCard";
 import Footer from "@/components/Footer";
 import CTAButton from "@/components/CTAButton";
 import Reveal from "@/components/Reveal";
-import { ZoomParallax } from "@/components/ZoomParallax";
-import ScrollFrameAnimation from "@/components/ScrollFrameAnimation";
 import { images } from "@/lib/images";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+
+// Dynamically import heavy components
+const ZoomParallax = dynamic(() => import("@/components/ZoomParallax").then(mod => ({ default: mod.ZoomParallax })), {
+  loading: () => <div className="h-screen bg-spirulina-green" />,
+  ssr: false
+});
+
+const ScrollFrameAnimation = dynamic(() => import("@/components/ScrollFrameAnimation"), {
+  loading: () => <div className="h-[300vh] bg-black" />,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: "Simplii Green | Fresh-Frozen Spirulina Cubes | SimpliiGood",
@@ -370,6 +380,7 @@ export default function SimpliiGreenPage() {
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
+                    loading={i < 2 ? "eager" : "lazy"}
                   />
                 </div>
                 <h3 className="mt-6 font-card-headline font-medium text-[24px] text-spirulina-green">
@@ -536,6 +547,7 @@ export default function SimpliiGreenPage() {
                           fill
                           sizes="(max-width: 768px) 100vw, 33vw"
                           className="object-cover group-hover/card:shadow-xl"
+                          loading={i < 2 ? "eager" : "lazy"}
                         />
                       </div>
                     </CardItem>
@@ -571,6 +583,7 @@ export default function SimpliiGreenPage() {
                   image={r.image}
                   title={r.title}
                   description={r.description}
+                  priority={i < 2}
                 />
               </Reveal>
             ))}
@@ -603,6 +616,7 @@ export default function SimpliiGreenPage() {
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover"
+                loading="lazy"
               />
             </div>
             <div>

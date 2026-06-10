@@ -8,9 +8,10 @@ interface AnimatedRecipeCardProps {
   image: string;
   title: string;
   description: string;
+  priority?: boolean;
 }
 
-export default function AnimatedRecipeCard({ image, title, description }: AnimatedRecipeCardProps) {
+export default function AnimatedRecipeCard({ image, title, description, priority = false }: AnimatedRecipeCardProps) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -88,6 +89,7 @@ export default function AnimatedRecipeCard({ image, title, description }: Animat
                 className="w-full h-full object-cover blur-sm scale-200 opacity-70"
                 width={500}
                 height={300}
+                loading="lazy"
               />
             </motion.div>
           </div>
@@ -102,6 +104,7 @@ export default function AnimatedRecipeCard({ image, title, description }: Animat
               className="rounded-2xl w-full h-full shadow-lg"
               width={500}
               height={300}
+              loading={priority ? "eager" : "lazy"}
             />
           </motion.div>
         </motion.div>

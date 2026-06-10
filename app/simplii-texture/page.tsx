@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import Nav from "@/components/Nav";
 import InquiryForm, { type Field } from "@/components/InquiryForm";
 import Footer from "@/components/Footer";
@@ -9,7 +10,12 @@ import Reveal from "@/components/Reveal";
 import { images } from "@/lib/images";
 import { MarqueeAnimation } from "@/components/ui/marquee-effect";
 import { ParallaxScrollFeatureSection } from "@/components/ui/parallax-scroll-feature-section";
-import ScrollFrameAnimation from "@/components/ScrollFrameAnimation";
+
+// Dynamically import heavy components
+const ScrollFrameAnimation = dynamic(() => import("@/components/ScrollFrameAnimation"), {
+  loading: () => <div className="h-[300vh] bg-black" />,
+  ssr: false
+});
 
 export const metadata: Metadata = {
   title: "Simplii Texture | Spirulina Alternative Seafood Technology",
@@ -135,6 +141,7 @@ export default function SimpliiTexturePage() {
             priority
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover"
+            loading="eager"
           />
         </div>
       </section>

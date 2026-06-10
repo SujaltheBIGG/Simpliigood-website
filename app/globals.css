@@ -3,6 +3,41 @@
 @tailwind utilities;
 
 /* ------------------------------------------------------------------ *
+ *  Safari Performance Optimizations
+ * ------------------------------------------------------------------ */
+/* Force hardware acceleration for smoother animations */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  * {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  img, video {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+/* Improve scroll performance on Safari */
+html {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+/* Reduce paint operations for sticky elements */
+.sticky {
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Optimize image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ------------------------------------------------------------------ *
  *  Custom Fonts
  * ------------------------------------------------------------------ */
 /* franklingothicurwcom-dem.otf — Compressed Demi → H1 Hero Headlines */
